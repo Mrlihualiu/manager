@@ -1,9 +1,46 @@
 import React from 'react';
 import { Menu,Icon } from 'antd';
+import MenuConfig from './../../config/menuConfig';
+import './index.less';
 
 const SubMenu = Menu.SubMenu;
 export default class NavLeft extends React.Component{
+    componentWillMount(){
+        const menuTreeNode = this.renderMenu(MenuConfig);
+        this.setState({
+            menuTreeNode
+        })
+    }
+    // 菜单渲染
+    renderMenu=(data) => {
+        return data.map((item)=>{
+            if(item.children){
+                return (
+                    <SubMenu title={item.title} key={item.key}>
+                        { this.renderMenu(item.children) }
+                    </SubMenu>
+                )
+            }
+            this.rootSubmenuKeys.push(item.title);
+            return <Menu.Item title={item.title} key={item.key}>{ item.title }</Menu.Item>
+        })
+    }
+    rootSubmenuKeys = [];
 
+    state = {
+        openKeys: [],
+    };
+
+    onOpenChange = (openKeys) => {
+        const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
+        if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+            this.setState({ openKeys });
+        } else {
+            this.setState({
+                openKeys: latestOpenKey ? [latestOpenKey] : [],
+            });
+        }
+    }
     render() {
         return (
             <div>
@@ -11,13 +48,13 @@ export default class NavLeft extends React.Component{
                     <img src="/assets/logo.png" alt=""/>
                     <h1>建玛特购</h1>
                 </div>
-                <Menu theme="dark">
-                    <SubMenu key="sub1" title={<span><Icon type="mail" />第一个菜单</span>} >
-                        <Menu.Item key="1">option 1</Menu.Item>
-                        <Menu.Item key="2">option 2</Menu.Item>
-                        <Menu.Item key="3">option 3</Menu.Item>
-                        <Menu.Item key="4">option 4</Menu.Item>
-                    </SubMenu> 
+                <Menu 
+                    theme="dark" 
+                    mode="inline"
+                    openKeys={this.state.openKeys}
+                    onOpenChange={this.onOpenChange}  
+                >
+                    { this.state.menuTreeNode }
                 </Menu>
             </div>
         )
