@@ -15,7 +15,7 @@ export default class IRouter extends React.Component{
         return (
             <HashRouter>
                 <App>
-                    <Route path="/login" componenr={Login} />
+                    <Route path="/login" component={Login} />
                     <Route path="/admin" render={()=>
                         <Admin>
                             <Route path="/admin/ui/buttons" component={Buttons} />
