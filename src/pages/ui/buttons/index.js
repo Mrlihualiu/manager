@@ -2,6 +2,8 @@ import React from 'react';
 import { Row,Col,Button,Radio,Icon,Dropdown, Menu } from 'antd';
 import './index.less';
 
+const ButtonGroup = Button.Group;
+
 export default class Buttons extends React.Component{
     state = {
         size: 'large',
@@ -80,9 +82,34 @@ export default class Buttons extends React.Component{
                         <div className="item-wrap">
                             <div className="item-title">按钮组合</div>
                             <div className="item-body">
-                                <Button type="primary" loading>Loading</Button>
-                                <Button type="primary" shape="circle" loading />
-                                <Button type="primary" loading={this.state.loading} onClick={this.enterLoading}>Pick Me</Button>
+                                <h4>Basic</h4>
+                                <ButtonGroup className="marginR20">
+                                    <Button className="margin0">Cancel</Button>
+                                    <Button className="margin0">Ok</Button>
+                                </ButtonGroup>  
+                                <ButtonGroup className="marginR20">
+                                    <Button className="margin0" disabled>L</Button>
+                                    <Button className="margin0" disabled>M</Button>
+                                    <Button className="margin0" disabled>R</Button>
+                                </ButtonGroup>  
+                                <ButtonGroup className="marginR20">
+                                    <Button className="margin0">L</Button>
+                                    <Button className="margin0">M</Button>
+                                    <Button className="margin0">R</Button>
+                                </ButtonGroup>  
+                                <h4>With Icon</h4>
+                                <ButtonGroup className="marginR20">
+                                    <Button type="primary" className="margin0">
+                                        <Icon type="left" />Go back
+                                    </Button>
+                                    <Button type="primary" className="margin0">
+                                        Go forward<Icon type="right" />
+                                    </Button>
+                                </ButtonGroup>
+                                <ButtonGroup className="marginR20">
+                                    <Button type="primary" className="margin0" icon="cloud" />
+                                    <Button type="primary" className="margin0" icon="cloud-download" />
+                                </ButtonGroup>
                             </div>
                         </div>
                         
@@ -124,6 +151,16 @@ export default class Buttons extends React.Component{
                                         Actions <Icon type="down" />
                                     </Button>
                                 </Dropdown>
+                            </div>
+                        </div>
+
+                        <div className="item-wrap">
+                            <div className="item-title">block按钮</div>
+                            <div className="item-body">
+                                <Button type="primary" block>primary</Button>
+                                <Button block>默认</Button>
+                                <Button type="dashed" block>dished</Button>
+                                <Button type="danger" block>danger</Button>
                             </div>
                         </div>
 
