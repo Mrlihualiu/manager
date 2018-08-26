@@ -11,7 +11,7 @@ export default class Tab extends React.Component{
 
     handleModeChange = (e) => {
         console.log(e.target);
-        mode = e.target.value;
+        const mode = e.target.value;
         this.setState({mode});
     }
 
