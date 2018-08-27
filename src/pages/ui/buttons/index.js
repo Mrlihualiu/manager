@@ -119,6 +119,12 @@ export default class Buttons extends React.Component{
                         <div className="item-wrap">
                             <div className="item-title">图标按钮</div>
                             <div className="item-body">
+                                <Button type="primary" icon="plus">创建</Button>
+                                <Button icon="edit">编辑</Button>
+                                <Button type="danger" icon="delete">删除</Button>
+                                <Button icon="search">搜索</Button>
+                                <Button icon="download">下载</Button>
+                                <br/>
                                 <Button type="primary" shape="circle" icon="search" />
                                 <Button type="primary" icon="search">Search</Button>
                                 <Button shape="circle" icon="search" />
