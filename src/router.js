@@ -8,6 +8,10 @@ import Modals from './pages/ui/modals';
 import Loading from './pages/ui/loading';
 import NotiFication from './pages/ui/notification';
 import Tabs from './pages/ui/tabs';
+import Carousel from './pages/ui/carousel';
+import Gallery from './pages/ui/gallery';
+import Messages from './pages/ui/messages';
+import FormLogin from './pages/form/login';
 import NoMatch from './pages/nomatch';
 
 export default class IRouter extends React.Component{
@@ -24,6 +28,10 @@ export default class IRouter extends React.Component{
                             <Route path="/admin/ui/loading" component={Loading} />
                             <Route path="/admin/ui/tabs" component={Tabs} />
                             <Route path="/admin/ui/notification" component={NotiFication} />
+                            <Route path="/admin/ui/carousel" component={Carousel} />
+                            <Route path="/admin/ui/gallery" component={Gallery} />
+                            <Route path="/admin/ui/messages" component={Messages} />
+                            <Route path="/admin/form/login" component={FormLogin} />
                             <Route component={NoMatch} />
                         </Admin>
                     } />

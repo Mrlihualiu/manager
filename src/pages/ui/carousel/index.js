@@ -1,12 +1,11 @@
 import React from 'react';
-import {} from 'antd';
 
-export default class Login extends React.Component{
+export default class Carousel extends React.Component{
 
     render(){
         return (
             <div>
-                This is Login page!
+                This is Carousel page!
             </div>
         );
     }
