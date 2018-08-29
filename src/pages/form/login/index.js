@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row,Col,Button,Checkbox,Form,Input,Icon } from 'antd';
+import { Row,Col,Button,Checkbox,Form,Input,Icon,message } from 'antd';
 import './index.less';
 
 const FormItem = Form.Item;
@@ -18,6 +18,16 @@ export class FormLogin extends React.Component{
         this.props.from.validateFields((err,values) => {
             if(!err){
                 console.log('Received values of form: ', values);
+            }
+        });
+    }
+    handleSubmit2 = (e) => {
+        e.preventDefault();
+        let userInfo = this.props.form.getFieldsValue();
+        console.log(userInfo);
+        this.props.form.validateFields((err,values) => {
+            if(!err){
+                message.success(`${userInfo.userName2} 恭喜你,密码填写正确。${userInfo.password2}`);
             }
         });
     }
@@ -79,15 +89,17 @@ export class FormLogin extends React.Component{
                             <div className="item-title">竖向登录</div>
                             <div className="item-body">
                                 <Form onSubmit={this.handleSubmit} className="login-form">
-                                    <FormItem>
+                                    <FormItem label="用户名">
                                         {getFieldDecorator('userName2',{
+                                            initiaValue: false,
                                             rules: [{ required: true, message: '请输入用户名！' }],
                                         })(
                                             <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="请输入用户名"/>
                                         )}
                                     </FormItem>
-                                    <FormItem>
+                                    <FormItem label="密码">
                                         {getFieldDecorator('password2',{
+                                            initiaValue: false,
                                             rules: [{ required: true, message: '请输入用密码！' }],
                                         })(
                                             <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="请输入密码"/>
@@ -95,13 +107,13 @@ export class FormLogin extends React.Component{
                                     </FormItem>
                                     <FormItem>
                                         {getFieldDecorator('remember',{
-                                            valuePropName: 'checkbox',
+                                            valuePropName: 'checked',
                                             initiaValue: true,
                                         })(
                                             <Checkbox>记住我</Checkbox>
                                         )}
                                         <a className="login-form-forgot" href="">忘记密码</a>
-                                        <Button type="primary" htmlType="submit" className="login-form-button">
+                                        <Button type="primary" htmlType="submit" className="login-form-button" onClick={this.handleSubmit2}>
                                             登录
                                         </Button>
                                         没有账号？<a href="">马上注册</a>
