@@ -5,12 +5,17 @@ const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
 const RadioButton = Radio.Button;
 const Option = Select.Option;
-const arr = [1,2,3,4,5,6,5,4,2,3,4,55];
-let newa = Array.from([...new Set(arr)]);
+const TextArea = Input.TextArea;
 
 export class FormReg extends React.Component{
-
-   
+    state = {
+        userImg: '',
+        loding: false
+    }
+    handleSubmit = () =>{
+        let userInfo = this.props.form.getFieldsValue();
+        console.log(userInfo);
+    }
 
     render() {
 
@@ -25,11 +30,16 @@ export class FormReg extends React.Component{
                 sm:{ span: 10 }
             }
         }
+        const offsetLayout = {
+            wrapperCol:{
+                xs:{ span: 24 },
+                sm:{ span: 10,offset:4 }
+            } 
+        }
 
         return (
             <div>
                 <Card title="注册表单">
-                    <div>{ typeof newa }</div>
                     <Form layout="horizontal">
                         <FormItem {...formItemLayout} label="用户名">
                             {
@@ -146,9 +156,39 @@ export class FormReg extends React.Component{
                                 getFieldDecorator('birthday',{
       
                                 })(
-                                    <DatePicker placeholder="选择日期" />
+                                    <DatePicker
+                                        placeholder="选择日期"
+                                    />
                                 )
                             }
+                        </FormItem>
+                        <FormItem {...formItemLayout} label="头像">
+                            {
+                                getFieldDecorator('userImg',{
+      
+                                })(
+                                    <Upload 
+                                        listType="picture-card"
+                                        showUploadList={false}
+                                        action="//jsonplaceholder.typicode.com/posts/"
+                                        onChange={this.handleChange}
+                                    >
+                                    {this.state.userImg?<img src={this.state.userImg} />:<Icon type="plus" />}
+                                    </Upload>
+                                )
+                            }
+                        </FormItem>
+                        <FormItem {...offsetLayout}>
+                            {
+                                getFieldDecorator('agree',{
+      
+                                })(
+                                    <Checkbox>我已阅读<a href="#">建玛特购协议</a></Checkbox>
+                                )
+                            }
+                        </FormItem>
+                        <FormItem {...offsetLayout}>
+                            <Button type="primary" onClick={this.handleSubmit}>提交</Button>
                         </FormItem>
                     </Form>
                 </Card>
