@@ -41,7 +41,7 @@ const menuList = [
             },
         ]
     },
-    {
+    { 
         title: '表单',
         key: '/admin/form',
         children: [

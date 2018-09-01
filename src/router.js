@@ -13,6 +13,8 @@ import Gallery from './pages/ui/gallery';
 import Messages from './pages/ui/messages';
 import FormLogin from './pages/form/login';
 import FormReg from './pages/form/reg';
+import Basic from './pages/table/basic';
+import High from './pages/table/high';
 import NoMatch from './pages/nomatch';
 
 export default class IRouter extends React.Component{
@@ -34,6 +36,8 @@ export default class IRouter extends React.Component{
                             <Route path="/admin/ui/messages" component={Messages} />
                             <Route path="/admin/form/login" component={FormLogin} />
                             <Route path="/admin/form/reg" component={FormReg} />
+                            <Route path="/admin/table/basic" component={Basic} />
+                            <Route path="/admin/table/high" component={High} />
                             <Route component={NoMatch} />
                         </Admin>
                     } />
