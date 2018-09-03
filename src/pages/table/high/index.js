@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Table } from 'antd';
+// import { Card, Table } from 'antd';
 
 export default class High extends React.Component{
 

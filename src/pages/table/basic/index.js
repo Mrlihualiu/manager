@@ -1,11 +1,15 @@
 import React from 'react';
-import { Card, Table } from 'antd';
-import axios from 'axios';
+import { Card, Table, Modal, Button, message } from 'antd';
+import axios from './../../../axios/index';
+import Utils from './../../../utils/utils';
 
 export default class Basic extends React.Component{
     state = {
         dataSource2: [],
     } 
+    params = {
+        page: 1
+    }
     componentDidMount(){
         const dataSource = [
             {
@@ -37,6 +41,9 @@ export default class Basic extends React.Component{
                 from:'UK'
             },
         ];
+        dataSource.map((item,index)=>{
+            item.key = index;
+        })
         this.setState({
             dataSource
         });
@@ -45,19 +52,57 @@ export default class Basic extends React.Component{
 
     //动态获取mock数据
     request = () => {
-        let baseUrl = 'https://www.easy-mock.com/mock/5b8a081a78b10172ddd399ec/managerapi';
-        axios.get(baseUrl+'/table/list').then((res)=>{
-            if(res.status === '200'){ 
-                res.data.data.map((item, index) => {
-                    item.key = index;
-                })
-                this.setState({
-                    dataSource2: res.data.data
-                })
-                console.log(this.state.dataSource2);
+        const _this = this;
+        axios.ajax({
+            url: '/table/list',
+            data:{
+                params:{
+                    page: this.params.page,
+                }
             }
-        });
+        }).then((res) => {
+            if(res.code === 0){
+                this.setState({
+                    dataSource2: res.data,
+                    selectedRowKeys:[],     //重置所选key和item
+                    selectedRows:null,
+                    pagination: Utils.pagination(res,(current)=>{
+                        //to-do
+                        _this.params.page = current;
+                        this.request();
+                    }) 
+                })
+            }
+        })
     }
+    onRowClick = (record,index) => {
+        let selectKey = [index];
+        Modal.info({
+            title: '信息',
+            content: `姓名:${record.name},年龄:${record.age}`
+        })
+        this.setState({
+            selectedRowKeys: selectKey,
+            selectedItem: record
+        })
+    }
+    //多选框删除功能
+    handleDelete = () => {
+        let rows = this.state.selectedRows;
+        console.log(this.state);
+        let ids = [];
+        rows.map((item)=>{
+            ids.push(item.id)
+        })
+        Modal.confirm({
+            title:'提示',
+            content: `确定要删除这些数据吗？${ids.join(',')}`,
+            onOk:()=>{
+                message.success('删除成功')
+                this.request()
+            }
+        })
+    } 
 
     render() {
 
@@ -102,7 +147,10 @@ export default class Basic extends React.Component{
             {
                 title:'sex',
                 dataIndex:'sex',
-                key:'sex'
+                key:'sex',
+                render(sex){
+                    return sex === 1?'男':'女'
+                }
             },
             {
                 title:'age',
@@ -115,6 +163,21 @@ export default class Basic extends React.Component{
                 key:'from'
             }
         ];
+        const { selectedRowKeys } = this.state;
+        const rowSelection = {
+            type: 'radio',
+            selectedRowKeys
+        }
+        const rowCheckSelection = {
+            type: 'checkbox',
+            selectedRowKeys,
+            onChange: (selectedRowKeys,selectedRows) => {
+                this.setState({
+                    selectedRowKeys,
+                    selectedRows
+                })
+            }  
+        }
 
         return (
             <div>
@@ -132,6 +195,42 @@ export default class Basic extends React.Component{
                         pagination={false}
                         columns={columns2}
                         dataSource={this.state.dataSource2}
+                    />
+                </Card>
+                <Card title="单选" style={{margin:'10px 0'}}>
+                    <Table
+                        bordered
+                        rowSelection={rowSelection}
+                        onRow={(record,index)=>{
+                            return {
+                                onClick:()=>{
+                                    this.onRowClick(record,index);
+                                }
+                            };
+                        }}
+                        pagination={false}
+                        columns={columns2}
+                        dataSource={this.state.dataSource2}
+                    />
+                </Card>
+                <Card title="多选" style={{margin:'10px 0'}}>
+                    <div style={{marginBottom:10}}>
+                        <Button type="danger" icon="delete" onClick={this.handleDelete}>删除</Button>
+                    </div>
+                    <Table
+                        bordered
+                        rowSelection={rowCheckSelection}
+                        pagination={false}
+                        columns={columns2}
+                        dataSource={this.state.dataSource2}
+                    />
+                </Card>
+                <Card title="分页" style={{margin:'10px 0'}}>
+                    <Table
+                        bordered
+                        columns={columns2}
+                        dataSource={this.state.dataSource2}
+                        pagination={this.state.pagination}
                     />
                 </Card>
             </div>

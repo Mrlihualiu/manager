@@ -1,11 +1,11 @@
 import React from 'react';
-import { Cart,Form,Button,Input,Checkbox,Radio,Select,Switch,TimePicker,Upload,Icon,message, Card, InputNumber,DatePicker } from 'antd';
+import { Form,Button,Input,Checkbox,Radio,Select,Switch,Upload,Icon, Card, InputNumber,DatePicker } from 'antd';
 
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
-const RadioButton = Radio.Button;
+// const RadioButton = Radio.Button;
 const Option = Select.Option;
-const TextArea = Input.TextArea;
+// const TextArea = Input.TextArea;
 
 export class FormReg extends React.Component{
     state = {

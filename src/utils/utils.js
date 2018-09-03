@@ -1,3 +1,4 @@
+import { Pagination } from "antd";
 
 export default {
     formateDate(time){
@@ -11,5 +12,19 @@ export default {
             seconds = date.getSeconds()>9?date.getSeconds():'0'+date.getSeconds();
 
         return year+'-'+month+'-'+day+' '+hour+':'+minutes+':'+seconds;
+    },
+    pagination(data,callback){
+        return {
+            onChange: (current)=>{
+                callback(current)
+            },
+            current: data.page,
+            pageSize: data.page_size,
+            total: data.total,
+            showTotal:()=>{
+                return `第${data.page}页，共${Math.ceil(data.total/data.page_size)}页`
+            },
+            showQuickJumper: true
+        }
     }
 }
