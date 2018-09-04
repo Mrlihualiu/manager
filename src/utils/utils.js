@@ -1,4 +1,4 @@
-import { Pagination } from "antd";
+// import { Pagination } from "antd";
 
 export default {
     formateDate(time){
