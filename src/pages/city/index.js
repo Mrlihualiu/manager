@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card,Button,Table,Form,Select } from 'antd';
+import { Card,Button,Table,Form,Select,Modal,message } from 'antd';
 import axios from './../../axios/index';
 import Utils from './../../utils/utils';
 
@@ -7,7 +7,7 @@ const FormItem = Form.Item;
 const Option = Select.Option;
 export default class City extends React.Component{
     state = {
-
+        isShowOpenCity:false
     }
     params = {
         page:1
@@ -30,8 +30,8 @@ export default class City extends React.Component{
                     item.key = index;
                     return item;
                 }),
-                pagination:Utils.pagination(res,(current)=>{
-                    _this.params.page = current;
+                pagination: Utils.pagination(res.data,(current)=>{
+                    _this.params.page = current; 
                     _this.requestList();
                 })
             })
@@ -39,8 +39,30 @@ export default class City extends React.Component{
     }
     //开通城市
     handleOpenCity = () => {
-
+        this.setState({
+            isShowOpenCity: true
+        })
     }
+    //城市开通提交
+    handleSubmit = () => {
+        let cityInfo = this.cityForm.props.form.getFieldsValue();
+        console.log(cityInfo);
+        axios.ajax({
+            url:'/city/open',
+            data:{
+                params:cityInfo
+            }
+        }).then((res)=>{
+            if(res.code === 0){
+                message.success('新增开通城市成功！')
+                this.setState({
+                    isShowOpenCity:false
+                })
+                this.requestList();
+            }
+        })
+    }
+
     render(){
         const columns = [
             {
@@ -109,6 +131,18 @@ export default class City extends React.Component{
                         pagination={this.state.pagination}
                     />
                 </div>
+                <Modal 
+                    title="开通城市"
+                    visible={this.state.isShowOpenCity}
+                    onCancel={()=>{
+                        this.setState({
+                            isShowOpenCity:false
+                        })
+                    }}
+                    onOk={this.handleSubmit}
+                >
+                    <OpenCityForm wrappedComponentRef={(inst)=>{ this.cityForm = inst }} />
+                </Modal>
             </div>
         )
     }

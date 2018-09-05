@@ -38,6 +38,7 @@ export default class Axios{
                 }
                 if(response.status === 200){
                     let res = response.data;
+                    console.log(res)
                     if(res.code === 0){
                         resolve(res);
                     }else{

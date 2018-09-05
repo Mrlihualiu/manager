@@ -20,9 +20,9 @@ export default {
             },
             current: data.page,
             pageSize: data.page_size,
-            total: data.total,
+            total: data.total_count,
             showTotal:()=>{
-                return `第${data.page}页，共${Math.ceil(data.total/data.page_size)}页`
+                return `第${data.page}页，共${data.page_count}页`
             },
             showQuickJumper: true
         }
