@@ -16,6 +16,7 @@ import FormReg from './pages/form/reg';
 import Basic from './pages/table/basic';
 import High from './pages/table/high';
 import City from './pages/city';
+import Order from './pages/order';
 import NoMatch from './pages/nomatch';
 
 
@@ -41,6 +42,7 @@ export default class IRouter extends React.Component{
                             <Route path="/admin/table/basic" component={Basic} />
                             <Route path="/admin/table/high" component={High} />
                             <Route path="/admin/city" component={City} />
+                            <Route path="/admin/order" component={Order} />
                             <Route component={NoMatch} />
                         </Admin>
                     } />
