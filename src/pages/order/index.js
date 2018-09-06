@@ -6,6 +6,12 @@ const Option = Select.Option;
 export default class Order extends React.Component{
     state = {}
     render(){
+        const columns = [
+            {
+                title:'订单编号',
+                dataIndex:'order_sn'
+            }
+        ]
         return (
             <div>
                 <Card>
@@ -15,6 +21,7 @@ export default class Order extends React.Component{
         ); 
     }
 }
+
 class FilterForm extends React.Component{
 
     render(){
