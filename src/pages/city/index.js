@@ -3,6 +3,7 @@ import { Card,Button,Table,Form,Select,Modal,message } from 'antd';
 import axios from './../../axios/index';
 import Utils from './../../utils/utils';
 
+
 const FormItem = Form.Item;
 const Option = Select.Option;
 export default class City extends React.Component{
@@ -21,7 +22,7 @@ export default class City extends React.Component{
          axios.ajax({
              url:'/open_city',
              data:{
-                 params: this.params.page
+                params: this.params.page
              }
          }).then((res)=>{
             console.log(res);

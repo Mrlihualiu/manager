@@ -1,0 +1,1 @@
+const mockUrlHeader = 'https://api.manager/mock';

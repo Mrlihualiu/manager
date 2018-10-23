@@ -1,6 +1,7 @@
 import JsonP from 'jsonp';
 import axios from 'axios';
 import { Modal } from 'antd';
+import '../mockdata.js';
 
 export default class Axios{
     static jsonp(options){
@@ -23,12 +24,13 @@ export default class Axios{
             loading = document.getElementById('ajaxLoading');
             loading.style.display = 'block';
         }
-        let baseApi = 'https://www.easy-mock.com/mock/5b8a081a78b10172ddd399ec/managerapi';
+        // let baseApi = 'https://www.easy-mock.com/mock/5b8a081a78b10172ddd399ec/managerapi';
+        //let baseApi = 'https://api.manager/mock';
         return new Promise((resolve,reject) => {
             axios({
-                method: 'get',
+                method: 'post',
                 url: options.url,
-                baseURL: baseApi,
+                //baseURL: baseApi,
                 timeout: 15000,
                 params: (options.data && options.data.params) || '' 
             }).then((response) => {

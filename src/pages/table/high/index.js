@@ -153,6 +153,8 @@ export default class High extends React.Component{
                         case 6:
                             str = '华东';
                             break;
+                        default:
+                            break;
                     }
                     return `${str}地区 CHINA`;
                 }
@@ -192,6 +194,8 @@ export default class High extends React.Component{
                         case 6:
                             str = '旅行';
                             break;
+                        default:
+                            break;
                     }
                     return str;
                 }
@@ -218,6 +222,8 @@ export default class High extends React.Component{
                             break;
                         case 5:
                             str = '销售';
+                            break;
+                        default:
                             break;
                     }
                     return str;
@@ -324,6 +330,8 @@ export default class High extends React.Component{
                         case 6:
                             str = '华东';
                             break;
+                        default:
+                            break;
                     }
                     return `${str}地区 CHINA`;
                 }
@@ -363,6 +371,8 @@ export default class High extends React.Component{
                         case 6:
                             str = '旅行';
                             break;
+                        default:
+                            break;
                     }
                     return str;
                 }
@@ -389,6 +399,8 @@ export default class High extends React.Component{
                             break;
                         case 5:
                             str = '销售';
+                            break;
+                        default:
                             break;
                     }
                     return str;
@@ -449,6 +461,8 @@ export default class High extends React.Component{
                         case 6:
                             str = '华东';
                             break;
+                        default:
+                            break;
                     }
                     return `${str}地区 CHINA`;
                 }
@@ -488,6 +502,8 @@ export default class High extends React.Component{
                         case 6:
                             str = '旅行';
                             break;
+                        default:
+                            break;
                     }
                     return str;
                 }
@@ -514,6 +530,8 @@ export default class High extends React.Component{
                             break;
                         case 5:
                             str = '销售';
+                            break;
+                        default:
                             break;
                     }
                     return str;
