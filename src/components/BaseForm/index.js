@@ -7,7 +7,7 @@ const Option = Select.Option;
 class FilterForm extends React.Component{
 
     handleFilterSubmit = ()=>{
-        let fieldsValue = this.form.getFieldsValue();
+        let fieldsValue = this.props.form.getFieldsValue();
         this.props.folterSubmit(fieldsValue);
     }
 
@@ -19,7 +19,7 @@ class FilterForm extends React.Component{
         const { getFieldDecorator } = this.props.form;
         const formList = this.props.formList;
         const formItemList = [];
-        if(formList && formList.length>0){
+        if (formList && formList.length>0){
             formList.forEach((item,i)=>{
                 let label = item.label;
                 let field = item.field;
@@ -92,7 +92,7 @@ class FilterForm extends React.Component{
     render(){
         return (
             <Form layout="inline">
-                { this.initFormList }
+                { this.initFormList() }
                 <FormItem>
                     <Button type="primary" style={{ margin: '0 20px' }} onClick={this.handleFilterSubmit}>查询</Button>
                     <Button onClick={this.reset}>重置</Button>

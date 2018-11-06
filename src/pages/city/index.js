@@ -85,7 +85,7 @@ export default class City extends React.Component{
                 title: '营运模式',
                 dataIndex: 'op_mode',
                 render(op_mode) {
-                    return op_mode == 1 ? '自营' : '加盟';
+                    return op_mode === 1 ? '自营' : '加盟';
                 }
             }, 
             {

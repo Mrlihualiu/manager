@@ -62,6 +62,7 @@ export default class Basic extends React.Component{
             }
         }).then((res) => {
             if(res.code === 0){
+                console.log(res);
                 this.setState({
                     dataSource2: res.data,
                     selectedRowKeys:[],     //重置所选key和item

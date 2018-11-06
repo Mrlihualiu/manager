@@ -46,11 +46,11 @@ export default class IRouter extends React.Component{
                             <Route component={NoMatch} />
                         </Admin>
                     } />
-                    <Route path="/common" render={()=>{
+                    <Route path="/common" render={()=>
                         <Common>
                             <Route path="/common/order/detail/:orderId" component={Login} />
                         </Common>
-                    }} 
+                    } 
                     />
                 </App>
             </HashRouter> 

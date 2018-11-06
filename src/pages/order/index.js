@@ -5,11 +5,11 @@ import Utils from '../../utils/utils'
 import BaseForm from '../../components/BaseForm'
 
 const FormItem = Form.Item;
-const Option = Select.Option;
+// const Option = Select.Option;
 export default class Order extends React.Component{
     state = {
-        orderInfo:{},
-        orderConfirmVisble:false
+        orderInfo:{},   //当前结束订单的信息
+        orderConfirmVisble:false    //结束订单信息模态框是否显示
     }
     params = {
         page: 1
@@ -33,7 +33,7 @@ export default class Order extends React.Component{
             field: 'order_status',
             placeholder: '全部',
             initiaValue: '1',
-            width: 80,
+            width: 120,
             list: [ { id: '0', name: '全部' }, { id: '1', name: '进行中' }, { id: '2', name: '结束行程' }, ]
         }
     ]
@@ -112,6 +112,7 @@ export default class Order extends React.Component{
             }
         })
     }
+    // 点击某一行
     onRowClick = (record, index) => {
         let selectKey = [index];
         this.setState({
@@ -119,6 +120,7 @@ export default class Order extends React.Component{
             selectedItem: record
         })
     }
+    //打开订单详情
     openOrderDetail = ()=>{
         let item = this.state.selectedItem;
         if(!item){
@@ -157,7 +159,10 @@ export default class Order extends React.Component{
             },
             {
                 title:'行驶时长',
-                dataIndex:'total_time'
+                dataIndex:'total_time',
+                render(total_time){
+                    return total_time + 'min'
+                }
             },
             {
                 title:'状态',
