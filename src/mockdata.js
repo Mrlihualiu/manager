@@ -80,3 +80,45 @@ Mock.mock(/order\/ebike_info/,{      //订单结束信息
         "location": "@city"
     }
 })
+Mock.mock(/order\/detail/,{      //订单详情
+    "code": 0,
+    "result": {
+        "status": 2,
+        "order_sn": "T1803244422704080JGJI",
+        "bike_sn": "802410001",
+        "mode|1-2": 1,
+        "start_location": "北京市昌平区回龙观东大街",
+        "end_location": "北京市海淀区奥林匹克公园",
+        "city_id": 1,
+        "mobile": "18580215458",
+        "user_name": "@cname",
+        "distance": 10000,
+        "bike_gps": "116.398806,40.008637",
+        "star_time": '1521865027000',
+        "end_time": '1521865251000',
+        "total_time": 224,
+        "position_list":[{
+            "lon": 116.361221,
+            "lat": 40.043776
+        },{
+            "lon": 116.361221,
+            "lat": 40.043776
+        },{
+            "lon": 116.361221,
+            "lat": 40.043776
+        },{
+            "lon": 116.361221,
+            "lat": 40.043776
+        },{
+            "lon": 116.361221,
+            "lat": 40.043776
+        },{
+            "lon": 116.361221,
+            "lat": 40.043776
+        },{
+            "lon": 116.361221,
+            "lat": 40.043776
+        },],
+        
+    }
+})
