@@ -5,7 +5,9 @@ import Utils from '../../utils/utils'
 import './detail.less'
 
 export default class Order extends React.Component{
+
     state = {}
+
     componentDidMount(){
         let orderId = this.props.match.params.orderId;
         if(orderId){
@@ -26,16 +28,20 @@ export default class Order extends React.Component{
                 this.setState({
                     orderInfo: res.result
                 })
-                this.renderMap();
+                this.renderMap(res.result);
             }
         })
     }
     //地图初始化
-    renderMap = () => {
+    renderMap = (result) => {
         this.map = new window.BMap.Map('orderDetailMap');
         this.map.centerAndZoom('重庆', 11); 
+        //添加地图控件
         this.addMapControl();
-        this.drawBikeRoute();
+        //画线路图
+        //this.drawBikeRoute(result.position_list);
+        //绘制服务区
+        //this.drawServiceArea(result.area);
     }
     //添加地图控件
     addMapControl = ()=>{
@@ -45,9 +51,63 @@ export default class Order extends React.Component{
     }
     //绘制用户行驶路线
     drawBikeRoute = (positionList) => {
-        let map = this.map;
         let startPoint = '';
         let endPoint = '';
+        if(positionList.length>0){
+            let first = positionList[0];
+            let last = positionList[positionList.length];
+
+            startPoint = new window.BMap.Point(first.lon,first.lat);
+            let startIcon = new window.BMap.Icon('/assets/start_point.png',new window.BMap.Size(36,42),{
+                imageSize: new window.BMap.size(36,42),
+                anchor: new window.BMap.Size(18,42)
+            })
+
+            let startMarker = new window.BMap.Marker(startPoint, { icon: startIcon });
+            this.map.addOverlay(startMarker);
+
+            endPoint = new window.BMap.Point(last.lon,last.lat);
+            let endIcon = new window.BMap.Icon('/assets/end_point.png',new window.BMap.Size(36,42),{
+                imageSize: new window.BMap.size(36,42),
+                anchor: new window.BMap.Size(18,42)
+            })
+
+            let endMarker = new window.BMap.Marker(endPoint, { icon: endIcon });
+            this.map.addOverlay(endMarker);
+
+            //链接路线图
+            let trackPoint = [];
+            for(let i=0;i<positionList.length;i++){
+                let point = positionList[i];
+                trackPoint.push(new window.BMap.point(point.lon, point.lat));
+            }
+
+            let polyline = new window.BMap.Polyline(trackPoint,{
+                strokeColor: '#1869AD',
+                strokeWeight: 3,
+                strokeOpacity: 1
+            })
+            this.map.addOverlay(polyline);
+            this.map.centerAndZoom(endPoint, 11);
+        }
+    }
+    //绘制服务区
+    drawServiceArea = (positionList)=>{
+        //链接线路
+        let trackPoint = [];
+        for(let i=0;i<positionList.length;i++){
+            let point = positionList[i];
+            trackPoint.push(new window.BMap.Point(point.lon, point.lat));
+        }
+        //绘制服务区
+        let polygon = new window.BMap.Polygon(trackPoint, {
+            strokeColor: '#CE0000',
+            strokeWeight: 4,
+            strokeOpacity: 1,
+            fillColor: '#ff8605',
+            fillOpacity: .4
+        })
+        this.map.addOverlay(polygon);
     }
 
     render(){
