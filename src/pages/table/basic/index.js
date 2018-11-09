@@ -43,6 +43,7 @@ export default class Basic extends React.Component{
         ];
         dataSource.map((item,index)=>{
             item.key = index;
+            return item;
         })
         this.setState({
             dataSource
@@ -93,7 +94,8 @@ export default class Basic extends React.Component{
         console.log(this.state);
         let ids = [];
         rows.map((item)=>{
-            ids.push(item.id)
+            ids.push(item.id);
+            return ids;
         })
         Modal.confirm({
             title:'提示',

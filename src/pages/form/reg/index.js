@@ -173,7 +173,7 @@ export class FormReg extends React.Component{
                                         action="//jsonplaceholder.typicode.com/posts/"
                                         onChange={this.handleChange}
                                     >
-                                    {this.state.userImg?<img src={this.state.userImg} />:<Icon type="plus" />}
+                                    {this.state.userImg?<img src={this.state.userImg} alt="图片" />:<Icon type="plus" />}
                                     </Upload>
                                 )
                             }
@@ -183,7 +183,7 @@ export class FormReg extends React.Component{
                                 getFieldDecorator('agree',{
       
                                 })(
-                                    <Checkbox>我已阅读<a href="#">建玛特购协议</a></Checkbox>
+                                    <Checkbox>我已阅读<a href="javascript">建玛特购协议</a></Checkbox>
                                 )
                             }
                         </FormItem>

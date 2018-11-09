@@ -2,8 +2,35 @@ import JsonP from 'jsonp';
 import axios from 'axios';
 import { Modal } from 'antd';
 import '../mockdata.js';
+import Utils from '../utils/utils';
 
 export default class Axios{
+
+    static requestList(_this,url,params){
+        var data = {
+            params: params
+        }
+        this.ajax({
+            url,
+            data
+        }).then((res)=>{
+            if(res && res.result){
+                let list = res.result.item_list.map((item,index) => {
+                    item.key = index;
+                    return item;
+                });
+                _this.setState({
+                    list,
+                    pagination: Utils.pagination(res, (current) => {
+                        _this.params.page = current;
+                        _this.requestList();
+                    })
+                })
+                console.log(_this.list);
+            }
+        })
+    }
+
     static jsonp(options){
         return new Promise((resolve,reject)=>{
             JsonP(options.url,{
@@ -40,7 +67,6 @@ export default class Axios{
                 }
                 if(response.status === 200){
                     let res = response.data;
-                    console.log(res)
                     if(res.code === 0){
                         resolve(res);
                     }else{
