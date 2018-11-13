@@ -13,7 +13,6 @@ Mock.mock(/table\/list/,{      //表格
         "work|1-5": 1,
         "hobby|1-6": 1
     }]
-    
 })
 Mock.mock(/city\/open/,{      //城市
     "code": 0,
@@ -27,19 +26,19 @@ Mock.mock(/\/open_city/,{      //开通城市
         "total_count": 60,
         "page_count": 6,
         "item_list|10": [{
-        "id|+1": 1,
-        "name": "@city",
-        "mode|1-2": 1,
-        "op_mode|1-2": 1,
-        "franchisee_id": 77,
-        "franchisee_name": "松果自营",
-        "city_admins|1-2": [{
-            "user_name": "@cname",
-            "user_id|+1": 10001,
-        }],
-        "open_time": "@datetime",
-        "sys_user_name": "@cname",
-        "update_time": 1520476737000
+            "id|+1": 1,
+            "name": "@city",
+            "mode|1-2": 1,
+            "op_mode|1-2": 1,
+            "franchisee_id": 77,
+            "franchisee_name": "松果自营",
+            "city_admins|1-2": [{
+                "user_name": "@cname",
+                "user_id|+1": 10001,
+            }],
+            "open_time": "@datetime",
+            "sys_user_name": "@cname",
+            "update_time": 1520476737000
         }]
     }
 })
@@ -120,5 +119,24 @@ Mock.mock(/order\/detail/,{      //订单详情
             "lat": 40.043776
         },],
         
+    }
+})
+Mock.mock(/user\/list/,{      //用户
+    "code": 0,
+    "data": {
+        "item_list|10": [{
+            "id|+1": 1,
+            "name": "@cname",
+            "sex|1-2": 1,
+            "state|1-5": 1,
+            "interest|1-8": 1,
+            "isMarried|0-1": 1,
+            "birthday": "2000-01-01",
+            "address": "北京市海淀区",
+            "time": "9:00:00"
+        }],
+        "page": 1,
+        "page_size": 10,
+        "total_count": 30
     }
 })

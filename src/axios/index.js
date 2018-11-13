@@ -14,8 +14,8 @@ export default class Axios{
             url,
             data
         }).then((res)=>{
-            if(res && res.result){
-                let list = res.result.item_list.map((item,index) => {
+            if(res && res.data){
+                let list = res.data.item_list.map((item,index) => {
                     item.key = index;
                     return item;
                 });
@@ -26,19 +26,20 @@ export default class Axios{
                         _this.requestList();
                     })
                 })
-                console.log(_this.list);
+                console.log(list); 
             }
         })
     }
 
     static jsonp(options){
-        return new Promise((resolve,reject)=>{
-            JsonP(options.url,{
+        return new Promise((resolve,reject) => {
+            JsonP(options.url, {
                 param:'callback'
-            },(err,response)=>{
-                // if(response.status === 'successs'){
+            },(err, response) => {
+                // console.log(response);
+                // if (response.status === 'success') {
                 //     resolve(response);
-                // }else{
+                // } else {
                 //     reject(response.message);
                 // }
             })

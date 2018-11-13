@@ -53,9 +53,6 @@ export default class City extends React.Component{
         }
     ]
 
-    openCityFormList = [
-        
-    ]
 
     handleFilter = (params)=>{
         this.params = params;
@@ -67,6 +64,7 @@ export default class City extends React.Component{
     }
     //请求数据接口
     requestList = () => {
+        // axios.requestList(this,'/open_city',this.params.page);
         const _this = this;
          axios.ajax({
              url:'/open_city',
@@ -74,7 +72,6 @@ export default class City extends React.Component{
                 params: this.params.page
              }
          }).then((res)=>{
-            console.log(res);
             this.setState({
                 list:res.data.item_list.map((item,index)=>{
                     item.key = index;

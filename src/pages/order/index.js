@@ -2,6 +2,7 @@ import React from 'react';
 import { Card,Table,Form,Button,Modal,message } from 'antd';
 import axios from '../../axios'
 import BaseForm from '../../components/BaseForm'
+import Utils from '../../utils/utils'
 
 const FormItem = Form.Item;
 // const Option = Select.Option;
@@ -45,25 +46,26 @@ export default class Order extends React.Component{
         this.requestList();
     }
     requestList = ()=>{
-        axios.requestList(this,'/order/list',this.params);
-        // axios.ajax({
-        //     url:'/order/list',
-        //     data:{
-        //         params: this.params
-        //     }
-        // }).then((res)=>{
-        //     let list = res.data.item_list.map((item,index) => {
-        //         item.key = index;
-        //         return item;
-        //     });
-        //     this.setState({
-        //         list,
-        //         pagination: Utils.pagination(res, (current) => {
-        //             _this.params.page = current;
-        //             _this.requestList();
-        //         })
-        //     })
-        // })
+        // axios.requestList(this,'/order/list',this.params);
+        const _this = this;
+        axios.ajax({
+            url:'/order/list',
+            data:{
+                params: this.params
+            }
+        }).then((res)=>{
+            let list = res.data.item_list.map((item,index) => {
+                item.key = index;
+                return item;
+            });
+            this.setState({
+                list,
+                pagination: Utils.pagination(res, (current) => {
+                    _this.params.page = current;
+                    _this.requestList();
+                })
+            })
+        })
     }
     //订单结束确认
     handleConfirm = ()=>{
