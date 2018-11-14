@@ -21,12 +21,12 @@ export default class Axios{
                 });
                 _this.setState({
                     list,
-                    pagination: Utils.pagination(res, (current) => {
+                    pagination: Utils.pagination(_this,res.data, (current) => {
                         _this.params.page = current;
                         _this.requestList();
                     })
                 })
-                console.log(list); 
+                console.log(_this.state.list)
             }
         })
     }

@@ -124,6 +124,10 @@ Mock.mock(/order\/detail/,{      //订单详情
 Mock.mock(/user\/list/,{      //用户
     "code": 0,
     "data": {
+        "page": 1,
+        "page_size": 10,
+        "page_count": 8,
+        "total_count": 30,
         "item_list|10": [{
             "id|+1": 1,
             "name": "@cname",
@@ -134,9 +138,6 @@ Mock.mock(/user\/list/,{      //用户
             "birthday": "2000-01-01",
             "address": "北京市海淀区",
             "time": "9:00:00"
-        }],
-        "page": 1,
-        "page_size": 10,
-        "total_count": 30
+        }]
     }
 })

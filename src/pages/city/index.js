@@ -64,25 +64,26 @@ export default class City extends React.Component{
     }
     //请求数据接口
     requestList = () => {
-        // axios.requestList(this,'/open_city',this.params.page);
-        const _this = this;
-         axios.ajax({
-             url:'/open_city',
-             data:{
-                params: this.params.page
-             }
-         }).then((res)=>{
-            this.setState({
-                list:res.data.item_list.map((item,index)=>{
-                    item.key = index;
-                    return item;
-                }),
-                pagination: Utils.pagination(res.data,(current)=>{
-                    _this.params.page = current; 
-                    _this.requestList();
-                })
-            })
-         })
+        axios.requestList(this,'/open_city',this.params.page);
+        // const _this = this;
+        //  axios.ajax({
+        //      url:'/open_city',
+        //      data:{
+        //         params: this.params.page
+        //      }
+        //  }).then((res)=>{
+        //     this.setState({
+        //         list:res.data.item_list.map((item,index)=>{
+        //             item.key = index;
+        //             return item;
+        //         }),
+        //         pagination: Utils.pagination(_this,res.data,(current)=>{
+        //             _this.params.page = current; 
+        //             res.data.page = current;
+        //             _this.requestList();
+        //         })
+        //     })
+        //  })
     }
     //开通城市
     handleOpenCity = () => {

@@ -16,16 +16,16 @@ export default {
 
         return year+'-'+month+'-'+day+' '+hour+':'+minutes+':'+seconds;
     },
-    pagination(data,callback){
+    pagination(_this,data,callback){
         return {
             onChange: (current)=>{
                 callback(current)
             },
-            current: data.page,
+            current: _this.params.page,
             pageSize: data.page_size,
             total: data.total_count,
             showTotal:()=>{
-                return `第${data.page}页，共${data.page_count}页`
+                return `第${_this.params.page}页，共${data.page_count}页`
             },
             showQuickJumper: true
         }
