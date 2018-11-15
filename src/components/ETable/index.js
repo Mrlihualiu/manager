@@ -128,9 +128,11 @@ export default class ETable extends React.Component {
         return <Table
                 className="card-wrap page-table"
                 bordered
-                {...this.props}
-                rowSelection = {row_selection?rowSelection:null}
-                onRow = {(record,index) => ({
+                dataSource={this.props.dateSource}
+                pagination={this.props.pagination}
+                columns={this.props.columns}
+                rowSelection={row_selection?rowSelection:null}
+                onRow={(record,index) => ({
                     onClick: ()=>{
                         if(!row_selection){
                             return 

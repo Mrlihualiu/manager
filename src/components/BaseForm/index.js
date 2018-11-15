@@ -94,17 +94,21 @@ class FilterForm extends React.Component{
                     formItemList.push(Date)
                 }
             })
+            // let isButton = this.props.option.isButton || false;
+            if(this.props.option===undefined){
+                const b = <FormItem>
+                            <Button type="primary" style={{ margin: '0 20px' }} onClick={this.handleFilterSubmit}>查询</Button>
+                            <Button onClick={this.reset}>重置</Button>
+                </FormItem>;
+                formItemList.push(b)
+            }
         }
         return formItemList;
     }
     render(){
         return (
-            <Form layout="inline">
+            <Form layout={this.props.option?'horizontal':'inline'}>
                 { this.initFormList() }
-                <FormItem>
-                    <Button type="primary" style={{ margin: '0 20px' }} onClick={this.handleFilterSubmit}>查询</Button>
-                    <Button onClick={this.reset}>重置</Button>
-                </FormItem>
             </Form>
         );
     }

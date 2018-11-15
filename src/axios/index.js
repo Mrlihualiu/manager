@@ -26,7 +26,6 @@ export default class Axios{
                         _this.requestList();
                     })
                 })
-                console.log(_this.state.list)
             }
         })
     }

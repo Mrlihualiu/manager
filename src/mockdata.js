@@ -130,7 +130,7 @@ Mock.mock(/user\/list/,{      //用户
         "total_count": 30,
         "item_list|10": [{
             "id|+1": 1,
-            "name": "@cname",
+            "username": "@cname",
             "sex|1-2": 1,
             "state|1-5": 1,
             "interest|1-8": 1,
