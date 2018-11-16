@@ -141,3 +141,13 @@ Mock.mock(/user\/list/,{      //用户
         }]
     }
 })
+Mock.mock(/user\/add/,{      //新增用户
+    "code": 0,
+    "data": {
+    }
+})
+Mock.mock(/user\/delete/,{      //删除用户
+    "code": 0,
+    "data": {
+    }
+})
