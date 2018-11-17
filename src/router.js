@@ -21,6 +21,7 @@ import NoMatch from './pages/nomatch';
 import Common from './common';
 import OrderDetail from './pages/order/detail';
 import User from './pages/user';
+import BikeMap from './pages/map/bikeMap';
 
 export default class IRouter extends React.Component{
 
@@ -46,6 +47,7 @@ export default class IRouter extends React.Component{
                             <Route path="/admin/city" component={City} />
                             <Route path="/admin/order" component={Order} />
                             <Route path="/admin/user" component={User} />
+                            <Route path='/admin/bikeMap' component={BikeMap} />
                             <Route component={NoMatch} />
                         </Admin>
                     } />

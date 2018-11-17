@@ -92,6 +92,23 @@ class FilterForm extends React.Component{
                         }
                     </FormItem>;
                     formItemList.push(Date)
+                } else if (item.type === '城市'){
+                    const cityList = [{id:'0',name:'全部'},{id:'1',name:'北京'},{id:'2',name:'上海'},{id:'3',name:'天津'},{id:'4',name:'重庆'},]
+                    const City= <FormItem label='城市' key={0}>
+                        {
+                            getFieldDecorator('city',{
+                                initialValue: '0'
+                            })(
+                                <Select
+                                    style={{ width: 80}}
+                                    placeholder='请选择城市'
+                                >
+                                    {Utils.getOptionList(cityList)}
+                                </Select>
+                            )
+                        }
+                    </FormItem>;
+                    formItemList.push(City)
                 }
             })
             // let isButton = this.props.option.isButton || false;
