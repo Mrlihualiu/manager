@@ -52,6 +52,58 @@ export default class BikeMap extends React.Component{
         let startPoint = new Window.BMap.Point(gps1[0],gps1[1])
         let endPoint = new Window.BMap.Point(gps2[0],gps2[1])
         this.map.centerAndZoom(endPoint,11)
+
+        let startPointIcon = new window.BMap.Icon('/assets/stat_point.png',new window.BMap.Size(36,42),{
+            imageSize: new window.BMap.Size(36,42),
+            anchor: new window.BMap.Size(18,42)
+        })
+        let bikeMarkerStart = new window.BMap.Marker(startPoint,{ icon:startPointIcon })
+        this.map.addOverlay(bikeMarkerStart)
+
+        let endPointIcon = new window.BMap.Icon('/assets/end_point.png',new window.BMap.Size(36,42),{
+            imageSize: new window.BMap.Size(36,42),
+            anchor: new window.BMap.Size(18,42)
+        })
+        let bikeMarkerEnd = new window.BMap.Marker(endPoint,{ icon:endPointIcon })
+        this.map.addOverlay(bikeMarkerEnd)
+
+        //绘制车辆行驶路线
+        let routeList = []
+        list.forEach((item)=>{
+            let p = item.split(',')
+            routeList.push(new window.BMap.point(p[0],p[1]))
+        })
+        let polyLine = new window.BMap.PolyLine(routeList,{
+            strokeColor: '#ef4136',
+            storkeWeiht: 2,
+            strokeOpacity: 1
+        })
+        this.map.addOverlay(polyLine)
+
+        //服务区  画线
+        let servicePointList = []
+        let serviceList = res.data.service_list
+        serviceList.forEach((item)=>{
+            servicePointList.push(new window.BMap.Point(item.lon,item.lat))
+        })
+        let polyServiceLine = new window.BMap.PolyLine(servicePointList,{
+            strokeColor: '#ef4136',
+            storkeWeiht: 3,
+            strokeOpacity: 1
+        })
+        this.map.addOverlay(polyServiceLine)
+        //添加地图中的自行车图标  画点
+        let bikeList = res.data.bike_list
+        let bikeIcon = new window.BMap.Icon('/assets/bike.jpg',new window.BMap.Size(36,42),{ //定义图片
+            imageSize: new window.BMap.Size(36,42),
+            anchor: new window.BMap.Size(18,42)
+        })
+        bikeList.forEach((item)=>{
+            let p = item.split(',')
+            let point = new window.BMap.Point(p[0],p[1])    //定义坐标点 维度、精度
+            let bikeMarker = new window.BMap.Marker(point,{icon:bikeIcon})     //定义坐标点
+            this.map.addOverlay(bikeMarker)     //地图中添加坐标点
+        })
     }
     handelFilterSubmit = (filterParams) => {
         this.params = filterParams;

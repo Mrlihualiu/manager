@@ -7,7 +7,7 @@ class FilterForm extends React.Component{
 
     handleFilterSubmit = ()=>{
         let fieldsValue = this.props.form.getFieldsValue();
-        this.props.folterSubmit(fieldsValue);
+        this.props.filterSubmit(fieldsValue);
     }
 
     reset = ()=>{
