@@ -2,7 +2,6 @@ import React from 'react';
 import { Card,Table,Form,Button,Modal,message } from 'antd';
 import axios from '../../axios'
 import BaseForm from '../../components/BaseForm'
-import Utils from '../../utils/utils'
 
 const FormItem = Form.Item;
 // const Option = Select.Option;

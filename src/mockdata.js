@@ -151,3 +151,20 @@ Mock.mock(/user\/delete/,{      //删除用户
     "data": {
     }
 })
+Mock.mock(/permission\/list/,{      //用户权限
+    "code": 0,
+    "data": {
+        "page": 1,
+        "page_size": 10,
+        "page_count": 8,
+        "total_count": 30,
+        "item_list|10": [{
+            "id|+1": 1,
+            "role_name": "@cname",
+            "status|0-1": 1,
+            "create_time": "2018-08-12 16:26:35",
+            "authorize_time": 1542792762,
+            "authorize_user_name|1-5": 1
+        }]
+    }
+})
