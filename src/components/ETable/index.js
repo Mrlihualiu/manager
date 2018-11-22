@@ -110,7 +110,10 @@ export default class ETable extends React.Component {
             selectedRowKeys,
             onChange: this.onSelectChange,
             onSelect: (record, selected, selectedRows) => {
-                console.log('...')
+                // p.updateSelectedItem(selectedRows,record)
+                console.log(record)
+                console.log(selected)
+                console.log(selectedRows)
             },
             onSelectAll: this.onSelectAll
         };

@@ -168,3 +168,8 @@ Mock.mock(/permission\/list/,{      //用户权限
         }]
     }
 })
+Mock.mock(/role\/create/,{      //创建角色
+    "code": 0,
+    "data": {
+    }
+})
