@@ -29,7 +29,6 @@ export default class NavLeft extends React.Component{
         })
     }
     rootSubmenuKeys = [];
-
     state = {
         openKeys: [],
     };
