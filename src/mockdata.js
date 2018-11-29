@@ -165,10 +165,10 @@ Mock.mock(/permission\/list/,{      //用户权限
             "create_time": "2018-08-12 16:26:35",
             "authorize_time": 1542792762,
             "authorize_user_name|1-5": 1,
-            "menu_list": [
-                '/user/index',
-                '/order/index',
-                '/echarts/bar/index'
+            "menus": [
+                '/city',
+                '/user',
+                '/ui/buttons'
             ]
         }]
     }
@@ -195,9 +195,10 @@ Mock.mock(/role\/user_list/,{
         "page_size": 10,
         "page_count": 8,
         "total_count": 30,
-        "user_id|1-1000": 1,
-        "user_name": "@cname",
-        "status|0-1": 0,
-        "role_name": "@cname"
+        "item_list|10":[{
+            "status|0-1": 0,
+            "user_id|+1": 1,
+            "user_name": "@cname"
+        }]
     }
 })

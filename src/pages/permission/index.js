@@ -52,7 +52,6 @@ export default class Permission extends React.Component{
     //设置权限
     handlePermission = () => {
         let item = this.state.selectedItem
-        console.log(item)
         if(!item){
             Modal.info({
                 title: '信息',
@@ -62,16 +61,14 @@ export default class Permission extends React.Component{
         }
         this.setState({
             isPermissionVisible: true,
-            detailInfo: item
-        })
-        let menuList = item.menuList
-        this.setState({
-            menuInfo: menuList
+            detailInfo: item,
+            menuInfo: item.menus
         })
     }
-
+    //设置权限提交
     handlePermEditSubmit = () => {
         let data = this.roleForm.props.form.getFieldsValue()
+        console.log(data)
         data.role_id = this.state.selectedItem.id
         data.menus = this.state.menuInfo
         axios.ajax({
@@ -95,28 +92,29 @@ export default class Permission extends React.Component{
         if(!item){
             Modal.info({
                 title: '信息',
-                content: '未选中任何项目'
+                content: '请选择一个角色'
             })
             return
         }
-        this.getRoleUserList(item.id)
+        this.getRoleUserList(item)
         this.setState({
             isUserVisible: true,
             isAuthClosed: false,
-            detailInfo: this.state.selectedItem
+            detailInfo: item
         })
     }
-    getRoleUserList = (id) => {
+    //查询当前角色 分配了哪些用户
+    getRoleUserList = (item) => {
         axios.ajax({
             url:'/role/user_list',
             data:{
                 params:{
-                    id:id
+                    id: item.id
                 }
             }
         }).then((res)=>{
             if(res){
-                this.getAuthUserList(res.data)
+                this.getAuthUserList(res.data.item_list)
             }
         })
     }
@@ -133,8 +131,9 @@ export default class Permission extends React.Component{
                 }
                 if(data.status === 1){
                     targetKeys.push(data.key)
+                }else{
+                    mockData.push(data)
                 }
-                mockData.push(data)
             }
         }
         this.setState({mockData, targetKeys})
@@ -275,6 +274,7 @@ export default class Permission extends React.Component{
                         wrappedComponentRef={(inst) => this.userAuthForm = inst}
                         isClosed={this.state.isAuthClosed}
                         detailInfo={this.state.detailInfo}
+                        targetKeys={this.state.targetKeys}
                         mockData={this.state.mockData}
                         patchUserInfo={this.patchUserInfo}
                     />
@@ -387,7 +387,7 @@ class PermEditForm extends React.Component {
                     checkable
                     defaultExpandAll
                     onCheck={(checkedKeys)=>{this.onCheck(checkedKeys)}}
-                    checkedKeys={menuInfo || []}
+                    checkedKeys={menuInfo}
                 >
                     <TreeNode title="平台权限" key="platform_all">
                         {this.renderTreeNodes(menuConfig)}
