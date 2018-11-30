@@ -105,7 +105,7 @@ export default class Permission extends React.Component{
     }
     //查询当前角色 分配了哪些用户
     getRoleUserList = (item) => {
-        axios.ajax({
+        axios.ajax({ 
             url:'/role/user_list',
             data:{
                 params:{
@@ -131,9 +131,8 @@ export default class Permission extends React.Component{
                 }
                 if(data.status === 1){
                     targetKeys.push(data.key)
-                }else{
-                    mockData.push(data)
                 }
+                mockData.push(data)
             }
         }
         this.setState({mockData, targetKeys})
