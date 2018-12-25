@@ -28,6 +28,7 @@ import Pie from './pages/echarts/pie';
 import Line from './pages/echarts/line';
 import Rich from './pages/rich';
 import Permission from './pages/permission';
+import Chadan from './pages/chadan';
 
 export default class IRouter extends React.Component{
 
@@ -47,6 +48,7 @@ export default class IRouter extends React.Component{
                             <Admin>
                                 <Switch>
                                     <Route path="/home" component={Home} />
+                                    <Route path="/chadan" component={Chadan} />
                                     <Route path="/ui/buttons" component={Buttons} />
                                     <Route path="/ui/modals" component={Modals} />
                                     <Route path="/ui/loading" component={Loading} />

@@ -53,7 +53,7 @@ export default class Header extends React.Component{
                     ''
                     :
                     <Row className="breadcrumb">
-                        <Col span="4" className="breadcrumb-title">首页</Col>    
+                        <Col span="4" className="breadcrumb-title"></Col>    
                         <Col span="20" className="weather">
                             <span className="date">{ this.state.sysTime }</span>
                             <span className="weather-detail">晴转多云</span>
@@ -65,3 +65,4 @@ export default class Header extends React.Component{
         );
     }
 }
+

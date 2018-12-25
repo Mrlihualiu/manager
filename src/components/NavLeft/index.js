@@ -1,14 +1,28 @@
 import React from 'react';
 import { Menu } from 'antd';
 import { NavLink } from 'react-router-dom'; 
+// import { switchMenu } from './../../redux/action';
 import MenuConfig from './../../config/menuConfig';
 import './index.less';
 
 const SubMenu = Menu.SubMenu;
 export default class NavLeft extends React.Component{
+    state = {
+        openKeys: [],
+        currentKey:''
+    };
+    handleClick = ({item,key}) => {
+        // const {dispatch} = this.props
+        // dispatch(switchMenu(item.props.title))
+        this.setState({
+            currentKey: key
+        })
+    }
     componentWillMount(){
         const menuTreeNode = this.renderMenu(MenuConfig);
+        let currentKey = window.location.hash.split('#')[1];
         this.setState({
+            currentKey,
             menuTreeNode
         })
     }
@@ -29,9 +43,7 @@ export default class NavLeft extends React.Component{
         })
     }
     rootSubmenuKeys = [];
-    state = {
-        openKeys: [],
-    };
+    
 
     onOpenChange = (openKeys) => {
         const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
@@ -53,6 +65,8 @@ export default class NavLeft extends React.Component{
                 <Menu 
                     theme="dark" 
                     mode="inline"
+                    onClick={this.handleClick}
+                    selectedKeys={this.state.currentKey}
                     openKeys={this.state.openKeys}
                     onOpenChange={this.onOpenChange}  
                 >

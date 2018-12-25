@@ -4,6 +4,5 @@ import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import IRouter from './router';
 
-
 ReactDOM.render(<IRouter />, document.getElementById('root'));
 registerServiceWorker();
