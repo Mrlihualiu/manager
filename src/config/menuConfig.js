@@ -4,11 +4,6 @@ const menuList = [
         key: '/home'
     },
     {
-        title:'茶蛋抢单',
-        key: '/chadan'
-
-    },
-    {
         title:'UI',
         key:'/ui',
         children:[
