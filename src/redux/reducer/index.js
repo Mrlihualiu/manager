@@ -1,19 +1,18 @@
 //Reducer 数据处理
 import { type } from './../action' 
 const initialState = {
-    cityId:'',
-    menuName: '首页'
+  cityId:'',
+  menuName: '首页'
 }
 
 export default (state=initialState, action) => {
-    switch (action) {
-        case type.SWITCH_MENU:
-            return {
-                ...state,
-                menuName: action.menuName
-            }
-            break
-        default:
-            break
-    }
+  switch (action) {
+    case type.SWITCH_MENU:
+      return Object.assign({}, state, {
+        menuName: action.menuName
+      })
+      break
+    default:
+      break
+  }
 }

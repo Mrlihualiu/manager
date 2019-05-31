@@ -7,6 +7,7 @@ export default class ChadanLogin extends React.Component {
   componentDidMount () {
 
   }
+  
   render () {
     const { getFieldDecorator } = this.props.form
     return (

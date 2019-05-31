@@ -39,7 +39,7 @@ export default class BikeMap extends React.Component{
         this.setState({
           total_count: res.result.total_count
         })
-        this.renderMap(res);
+        // this.renderMap(res);
       }
     })
   }
@@ -102,7 +102,7 @@ export default class BikeMap extends React.Component{
       let p = item.split(',')
       let point = new window.BMap.Point(p[0],p[1])    //定义坐标点 维度、精度
       let bikeMarker = new window.BMap.Marker(point,{icon:bikeIcon})     //定义坐标点
-      this.map.addOverlay(bikeMarker)     //地图中添加坐标点
+      this.map.addOverlay(bikeMarker)    //地图中添加坐标点
     })
   }
   handelFilterSubmit = (filterParams) => {

@@ -36,9 +36,6 @@ export class Chadan extends React.Component {
       }
     }).then((res) => {
       console.log(res)
-      // if(res.errorCode === 200){ //抢单成功
-
-      // }
     })
   }
   render() {

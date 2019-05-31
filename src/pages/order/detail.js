@@ -11,7 +11,7 @@ export default class Order extends React.Component{
     componentDidMount(){
         let orderId = this.props.match.params.orderId;
         if(orderId){
-             this.getDetailInfo(orderId)
+            this.getDetailInfo(orderId)
         }
     }
     //获取订单详情信息
@@ -28,7 +28,7 @@ export default class Order extends React.Component{
                 this.setState({
                     orderInfo: res.result
                 })
-                this.renderMap(res.result);
+                // this.renderMap(res.result);
             }
         })
     }
