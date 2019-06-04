@@ -1,8 +1,9 @@
 import React from 'react'
-import { Card, Form, Input, Select, Button, Row, Col, Modal} from 'antd'
+import { Card, Form, Input, Select, Button, Row, Col, Modal, Icon} from 'antd'
+import JSEncrypt from 'jsencrypt'
 import Utils from '../../utils/utils'
 import Axios from './../../axios/chadan'
-import ChadanLogin from './ChadanLogin.js'
+import qs from 'qs'
 const FormItem = Form.Item
 export class Chadan extends React.Component {
   state = {
@@ -12,15 +13,66 @@ export class Chadan extends React.Component {
   componentDidMount() {
 
   }
+  handleChadanLogin = e => {
+    e.preventDefault();
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        this.requestChadanLogin(values)
+      }
+    });
+  }
+  requestChadanLogin = (values) => {
+    const userNo = values.phone
+    let loginPwd = values.password
+    Axios.ajax({
+      url: 'http://chadan.wang/user/getPublicKey',
+      data: { userNo }
+    }).then((res) => {
+      if (res.errorCode === 200) {
+        let rsa = new JSEncrypt()
+        rsa.setPublicKey(res.data.publick_key)
+        const resloginPwd = encodeURIComponent(rsa.encrypt(loginPwd +''+res.data.random_str))
+        const data = {
+          userNo: userNo,
+          loginPwd: resloginPwd
+        }
+        Axios.ajax({
+          url: 'http://chadan.wang/user/login',
+          data: qs.stringify(data)
+        }).then((res) => {
+          if (res.errorCode === 200) {
+            localStorage.jsonid = res.data.remark
+            localStorage.userNo = userNo
+            localStorage.loginPwd = loginPwd
+            this.setState({
+              visible: false
+            })
+          } else {
+            Modal.error({
+              title: '错误信息',
+              content: res.errorMsg
+            });
+          }
+        })
+      } else {
+        Modal.error({
+          title: '错误信息',
+          content: res.errorMsg
+        });
+      }
+      
+    })
+  }
   startSubmit = () => {
-    const JSESSIONID = localStorage.getItem('JSESSIONID')
+    const JSESSIONID = localStorage.getItem('jsonid')
 
     if (JSESSIONID === null) {
       this.setState({
         visible: true
       })
     } else {
-      const formData = this.props.form.getFieldsValue();
+      this.setState({ JSESSIONID })
+      const formData = this.props.form.getFieldsValue()
       this.request(formData)
     }
   }
@@ -82,15 +134,6 @@ export class Chadan extends React.Component {
           <Row>
             <Col span = { 10 } offset = { 7 }>
               <Form layout = "vertical">
-                <FormItem label = "JSESSIONID" key = "JSESSIONID"> 
-                  {
-                    getFieldDecorator('JSESSIONID', {
-                      initialValue: 'cc01debd-f316-4bcb-bb7c-9370af22cd7a'
-                    })( 
-                      <Input type = "text" />
-                    )
-                  }
-                </FormItem>
                 <FormItem label = '面值' key = 'faceValue'>
                   {
                     getFieldDecorator('faceValue', {
@@ -128,7 +171,9 @@ export class Chadan extends React.Component {
                   <Button type = "primary"
                     icon = "play-circle"
                     onClick = {this.startSubmit}
-                  > 开始抢单 </Button>
+                  >
+                    开始抢单
+                  </Button>
                 </FormItem>
               </Form>
             </Col>
@@ -136,9 +181,47 @@ export class Chadan extends React.Component {
         </Card>
         <Modal
           visible={this.state.visible}
+          closable={false}
+          footer={null}
+          width={400}
           title="登录"
         >
-          <ChadanLogin />
+          <Form layout="vertical" onSubmit={this.handleChadanLogin}>
+            <FormItem key="phone">
+              {getFieldDecorator('phone', {
+                rules: [{
+                  required: true,
+                  message: '请输入手机号'
+                }]
+              })(
+                <Input
+                  type="phone"
+                  placeholder="请输入手机号"
+                  allowClear={true}
+                  prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.35)' }} />}
+                />
+              )}
+            </FormItem>
+            <FormItem key="password">
+              {getFieldDecorator('password', {
+                rules: [{
+                  required: true,
+                  message: '请输入密码'
+                }]
+              })(
+                <Input
+                  type="password"
+                  placeholder="请输入密码"
+                  allowClear={true}
+                  prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.35)' }} />} />
+              )}
+            </FormItem>
+            <FormItem>
+              <Button type="primary" htmlType="submit" className="login-form-button">
+                登录
+              </Button>
+            </FormItem>
+          </Form>
         </Modal>
       </div>
     )
