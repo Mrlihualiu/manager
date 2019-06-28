@@ -1,64 +1,64 @@
 @import './../../style/default.less';
 
 .header{
-    background-color: @colorM;
-    .header-top{
-        height: 60px;
-        line-height: 60px;
-        padding: 0 20px;
-        text-align: right; 
-        a{
-            margin-left: 40px;
-        }
-        .order-detail-logo{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            img{
-                width: 54px;
-                height: 49.5px;
-                margin-right: 10px;
-            }
-            h1{
-                color: #fff;
-                margin: 0;
-            }
-        }
+  background-color: @colorM;
+  .header-top{
+    height: 60px;
+    line-height: 60px;
+    padding: 0 20px;
+    text-align: right; 
+    a{
+      margin-left: 40px;
     }
-    .breadcrumb{
-        height: 40px;
-        line-height: 40px;
-        padding: 0 20px;
-        border-top: 1px solid #40a9ff;
-        .breadcrumb-title{
-            text-align: center;
-            font-size: @fontC;;
-            position: relative;
-            &:after{
-                content: '';
-                width: 0;
-                height: 0;
-                position: absolute;
-                top:98%;
-                left: 50%;
-                margin-left: -12px;
-                border-top: 9px solid @colorM;
-                border-left: 12px solid transparent;
-                border-right: 12px solid transparent;
-                border-bottom: 9px solid transparent;
-            }
-        }
-        .weather{
-            text-align: right;
-            .date{
-                margin-right: 10px;
-            }
-        }
-    }   
+    .order-detail-logo{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img{
+        width: 54px;
+        height: 49.5px;
+        margin-right: 10px;
+      }
+      h1{
+        color: #fff;
+        margin: 0;
+      }
+    }
+  }
+  .breadcrumb{
+    height: 40px;
+    line-height: 40px;
+    padding: 0 20px;
+    border-top: 1px solid #40a9ff;
+    .breadcrumb-title{
+      text-align: center;
+      font-size: @fontC;;
+      position: relative;
+      &:after{
+        content: '';
+        width: 0;
+        height: 0;
+        position: absolute;
+        top:98%;
+        left: 50%;
+        margin-left: -12px;
+        border-top: 9px solid @colorM;
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+        border-bottom: 9px solid transparent;
+      }
+    }
+    .weather{
+      text-align: right;
+      .date{
+        margin-right: 10px;
+      }
+    }
+  }   
 }
 .simple-page{
-    .header-top{
-        background-color: #1890ff;
-        color: @colorM;
-    }
+  .header-top{
+    background-color: #1890ff;
+    color: @colorM;
+  }
 }
