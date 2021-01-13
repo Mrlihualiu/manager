@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter,Route,Switch,Redirect } from 'react-router-dom';
+import { HashRouter as Router,Route,Switch,Redirect } from 'react-router-dom';
 
 import App from './App';
 import Admin from './admin';
@@ -30,12 +30,13 @@ import Line from './pages/echarts/line';
 import Rich from './pages/rich';
 import Permission from './pages/permission';
 import Chadan from './pages/chadan';
+import Demo from './pages/demo';
 
 export default class IRouter extends React.Component{
 
   render() {
     return (
-      <HashRouter>
+      <Router>
         <App>
           <Switch>
             <Route path="/login" component={Login} />
@@ -69,6 +70,7 @@ export default class IRouter extends React.Component{
                   <Route path='/charts/pie' component={Pie} />
                   <Route path='/charts/line' component={Line} />
                   <Route path='/rich' component={Rich} />
+                  <Route path='/demo' component={Demo} />
                   <Route path='/permission' component={Permission} />
                   <Route component={NoMatch} />
                   <Redirect to="/home" />
@@ -77,7 +79,7 @@ export default class IRouter extends React.Component{
             }/>
           </Switch>
         </App>
-      </HashRouter> 
+      </Router> 
     );
   }
 } 

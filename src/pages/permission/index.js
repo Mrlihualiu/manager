@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Button, Form,Input, Select, Modal, Transfer, Tree } from 'antd'
+import { Card, Button, Form, Input, Select, Modal, Transfer, Tree } from 'antd'
 import menuConfig from '../../config/menuConfig'
 import ETable from './../../components/ETable'
 import axios from './../../axios/index'
